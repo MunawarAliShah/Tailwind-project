@@ -2,22 +2,22 @@
   "name": "addtocart",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "demo.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "buid-css" : "tailwindcss-cli build ./css/tailwind.css -o ./dist/tailwind.css"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MunawarAliShah/AddToCart.git"
+    "url": "git+https://github.com/MunawarAliShah/Tailwind-project"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MunawarAliShah/AddToCart/issues"
+    "url": "https://github.com/MunawarAliShah/Tailwind-project/issues"
   },
-  "homepage": "https://github.com/MunawarAliShah/AddToCart#readme",
+  "homepage": "https://github.com/MunawarAliShah/Tailwind-project#readme",
   "devDependencies": {
     "tailwindcss-cli": "^0.1.2"
   }
