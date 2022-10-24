@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./products.js" async></script>
+    <script src="./demo.js" async></script>
+    <link rel="stylesheet" href="./dist/tailwind.css" />
+  </head>
+  <body class="bg-gray-100">
+    <div class="h-4 w-full text-center">
+      <img src="./Images/Header background.webp" height="400px" width="100%" />
+    </div>
+    <div class="h-12 p-4 m-4 text-center border-2 text-white">
+      <button class="bg-green-500 hover:bg-green-800 h-12 w-16">
+        <a href="demo.html">Home</a>
+      </button>
+      <button class="bg-green-500 hover:bg-green-800 h-12 w-16 ml-32">
+        <a href="demo.html">Store</a>
+      </button>
+      <button class="bg-green-500 hover:bg-green-800 h-12 w-24 ml-32">
+        <a href="demo.html">About Us</a>
+      </button>
+      <button class="bg-green-500 hover:bg-green-800 h-12 w-24 ml-32">
+        <a href="demo.html">Contact Us</a>
+      </button>
+      <button class="bg-green-500 hover:bg-green-800 h-12 w-24 ml-32">
+        <a href="demo.html">Feed Back</a>
+      </button>
+      <h1 class="text-yellow-500 text-9xl mt-16">Grocery-Store</h1>
+    </div>
+    <div class="mt-64 text-4xl text-white">
+      <marquee behavior="alternate" direction="left" scrollamount="20"
+        ><h1>Wellcome To Our Store Plz Choose Item's</h1></marquee
+      >
+    </div>
+    <div class="display: inline-flex bg-green-200 w-full mt-12">
+      <h2 class="mt-12 text-6xl text-center ml-96">Dairy Item's</h2>
+      <div class="shopping-bag ml-96 mt-10 mb-4 pl-24">
+        <button class="cart-popup" onblur="removecart()" onclick="showcart()"><img src="./Images/bag.png" alt="cart" />Cart Item's</button>
+          <div class="total-items-in-cart text-3xl pl-6">0</div>
+      </div>
+    </div>
+    <div class="flex">
+      <div class="w-10/12 p-11 pl-24">
+        <div class="products grid grid-cols-4 gap-6 w-max">
+          <!-- render porducts here -->
+        </div>
+      </div>
+      <!-- <button onclick="doSomething()">asdas</button> -->
+      <div class="cart hidden bg-blue-400 absolute right-1" onpointerdown="doSomething(event)">
+        <div class="flex bg-indigo-300 mt-11">
+          <div class="column1">Item</div>
+          <div class="column2 ml-24">Unit price</div>
+          <div class="column3 ml-20">Units</div>
+        </div>
+        <div class="cart-items display: inline">
+          <!-- render cart items here -->
+        </div>
+        <div class="cart-footer-one mt-12">
+          <div class="subtotal bg-indigo-400 mt-1 pt-6 text-2xl">
+            Subtotal (0 items): Rs= 0
+          </div>
+          <div
+            class="checkout bg-indigo-400 hover:bg-yellow-700 h-20 text-center mt-1 pt-6 text-2xl">
+            
+            <a href="./demo.html">
+              <button class="btn btn-primary btn-purchase" type="button">
+                PURCHASE
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="main-footer bg-black text-5xl text-yellow-500">
+        <div class="container main-footer-container display: inline-flex p-1.5">
+            <h3 class="band-name pl-48 mt-1.5">Grocery-store</h3>
+            <ul class="nav footer-nav display: inline-flex pl-96">
+                <li class="mr-14">
+                    <a href="https://www.youtube.com" target="_blank">
+                        <img src="./Images/YouTube Logo.png">
+                    </a>
+                </li>
+                <li class="mr-14">
+                    <a href="https://www.spotify.com" target="_blank">
+                        <img src="./Images/Spotify Logo.png">
+                    </a>
+                </li>
+                <li class="mr-14">
+                    <a href="https://www.facebook.com" target="_blank">
+                        <img src="./Images/Facebook Logo.png">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+  </body>
+</html>
