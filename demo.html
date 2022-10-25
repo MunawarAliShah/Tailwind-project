@@ -36,9 +36,9 @@
         ><h1>Wellcome To Our Store Plz Choose Item's</h1></marquee
       >
     </div>
-    <div class="display: inline-flex bg-green-200 w-full mt-12">
-      <h2 class="mt-12 text-6xl text-center ml-96">Dairy Item's</h2>
-      <div class="shopping-bag ml-96 mt-10 mb-4 pl-24">
+    <div class="display: inline-flex bg-green-200 w-full mt-12 h-32">
+      <h2 class="text-6xl text-center ml-96">Dairy Item's</h2>
+      <div class="shopping-bag ml-96 mb-4 pl-24">
         <button class="cart-popup" onblur="removecart()" onclick="showcart()"><img src="./Images/bag.png" alt="cart" />Cart Item's</button>
           <div class="total-items-in-cart text-3xl pl-6">0</div>
       </div>
@@ -50,7 +50,7 @@
         </div>
       </div>
       <!-- <button onclick="doSomething()">asdas</button> -->
-      <div class="cart hidden bg-blue-400 absolute right-1" onpointerdown="doSomething(event)">
+      <div class="cart hidden bg-blue-400 absolute right-1  h-full overflow-auto" onpointerdown="doSomething(event)">
         <div class="flex bg-indigo-300 mt-11">
           <div class="column1">Item</div>
           <div class="column2 ml-24">Unit price</div>

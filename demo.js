@@ -38,7 +38,7 @@ updateCart();
 function addToCart(id) {
   // check if prodcut already exist in cart
   if (cart.some((item) => item.id === id)) {
-    changeNumberOfUnits("plus", id);
+    changeNumberOfUnits("", id);
   } else {
     const item = products.find((product) => product.id === id);
 
@@ -77,7 +77,7 @@ function renderSubtotal() {
   });
 
   subtotalEl.innerHTML = `Subtotal (${totalItems} items): Rs=${totalPrice.toFixed(2)}`;
-  totalItemsInCartEl.innerHTML = totalItems;
+  totalItemsInCartEl.innerHTML = cart?.length;
 }
 
 function doSomething(event){
@@ -87,7 +87,6 @@ function showcart(){
     document.querySelector(".cart").style.display = "block"
   }
   function removecart(){
-    // alert("here")
     document.querySelector(".cart").style.display = "none"
   }
 
