@@ -3,36 +3,47 @@ const productsEl = document.querySelector(".products");
 const cartItemsEl = document.querySelector(".cart-items");
 const subtotalEl = document.querySelector(".subtotal");
 const totalItemsInCartEl = document.querySelector(".total-items-in-cart");
-document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
+document
+  .getElementsByClassName("btn-purchase")[0]
+  .addEventListener("click", purchaseClicked);
+
+let productarray = [];
+
+
 // RENDER PRODUCTS
-function renderProdcuts() {
-  products.forEach((product) => {
-    productsEl.innerHTML += `
+async function renderProducts() {
+  await fetch("https://fakestoreapi.com/products")
+    .then((res) => res.json())
+    .then((json) => {
+      json &&
+        json.length > 0 &&
+        productarray.push(...json)
+        console.log("productarray" , productarray)
+        json.map((productData) => {
+          productsEl.innerHTML += `
             <div class="flex bg-gray-200 text-black font-bold">
                 <div class="item-container display: inline-grid">
                     <div class="item-img h-64 w-64 display: inline-flex pb-8">
-                        <img class="h-64 w-64" src="${product.imgSrc}" alt="${product.name}">
+                        <img class="h-64 w-full" src="${productData.image}" alt="product img">
                     </div>
                     <div class="desc display: inline-block">
-                        <h2>${product.name}</h2>
-                        <h2><small class="rs">Rs=</small>${product.price}</h2>
+                        <h2>${productData.title}</h2>
+                        <h2><small class="rs">Rs=</small>${productData.price}</h2>
                     </div>
-                    <div class="add-to-cart display: inline-grid bg-blue-200 hover:bg-blue-400" onclick="addToCart(${product.id})">
+                    <div class="add-to-cart display: inline-grid bg-blue-200 hover:bg-blue-400" onclick="addToCart(${productData.id})">
                         <button class="display: inline-grid bg-blue-200 hover:bg-blue-400"><img src="./Images/bag-plus.png" alt="add to cart"></button>
                     </div>
                 </div>
             </div>
         `;
-  });
+        });
+    });
 }
-renderProdcuts();
 
+renderProducts();
 // cart array
 let cart = JSON.parse(localStorage.getItem("")) || [];
 updateCart();
-
-
-
 
 // ADD TO CART
 function addToCart(id) {
@@ -40,8 +51,10 @@ function addToCart(id) {
   if (cart.some((item) => item.id === id)) {
     changeNumberOfUnits("", id);
   } else {
-    const item = products.find((product) => product.id === id);
+    const item = productarray && productarray?.length > 0 && productarray?.find((product) => product.id === id);
+    console.log("item" ,item);
 
+    
     cart.push({
       ...item,
       numberOfUnits: 1,
@@ -52,10 +65,9 @@ function addToCart(id) {
 }
 
 function purchaseClicked() {
-  alert('Thank you for your purchase')
+  alert("Thank you for your purchase");
 }
-updateCart()
-
+updateCart();
 
 // update cart
 function updateCart() {
@@ -76,19 +88,21 @@ function renderSubtotal() {
     totalItems += item.numberOfUnits;
   });
 
-  subtotalEl.innerHTML = `Subtotal (${totalItems} items): Rs=${totalPrice.toFixed(2)}`;
+  subtotalEl.innerHTML = `Subtotal (${totalItems} items): Rs=${totalPrice.toFixed(
+    2
+  )}`;
   totalItemsInCartEl.innerHTML = cart?.length;
 }
 
-function doSomething(event){
+function doSomething(event) {
   event.preventDefault();
 }
-function showcart(){
-    document.querySelector(".cart").style.display = "block"
-  }
-  function removecart(){
-    document.querySelector(".cart").style.display = "none"
-  }
+function showcart() {
+  document.querySelector(".cart").style.display = "block";
+}
+function removecart() {
+  document.querySelector(".cart").style.display = "none";
+}
 
 // render cart items
 function renderCartItems() {
@@ -97,9 +111,9 @@ function renderCartItems() {
     cartItemsEl.innerHTML += `
         <div class="flex bg-gray-400 h-36">
             <div class="item-info h-32 w-28" onclick="removeItemFromCart(${item.id})">
-                <img class="h-24 w-full" src="${item.imgSrc}" alt="${item.name}">
+                <img class="h-24 w-full" src="${item.image}" alt="${item.name}">
 
-                <h4>${item.name}</h4><button class="bg-yellow-300 hover:bg-yellow-700 w-32">REMOVE ITEM</button>
+                <h4>${item.title}</h4><button class="bg-yellow-300 hover:bg-yellow-700 w-32">REMOVE ITEM</button>
           
             </div>
             <div class="unit-price ml-3 text-2xl mt-12">
@@ -130,8 +144,11 @@ function changeNumberOfUnits(action, id) {
     if (item.id === id) {
       if (action === "minus" && numberOfUnits > 1) {
         numberOfUnits--;
-      } else if (action === "plus" && numberOfUnits < item.instock) {
+      } else if (action === "plus") {
         numberOfUnits++;
+      }
+      if (numberOfUnits === item.instock) {
+        alert("Out Of Stoke");
       }
     }
 
