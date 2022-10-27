@@ -3,9 +3,7 @@ const productsEl = document.querySelector(".products");
 const cartItemsEl = document.querySelector(".cart-items");
 const subtotalEl = document.querySelector(".subtotal");
 const totalItemsInCartEl = document.querySelector(".total-items-in-cart");
-document
-  .getElementsByClassName("btn-purchase")[0]
-  .addEventListener("click", purchaseClicked);
+document.getElementsByClassName("btn-purchase")[0].addEventListener("click", purchaseClicked);
 
 let productarray = [];
 
@@ -18,7 +16,6 @@ async function renderProducts() {
       json &&
         json.length > 0 &&
         productarray.push(...json)
-        console.log("productarray" , productarray)
         json.map((productData) => {
           productsEl.innerHTML += `
             <div class="flex bg-gray-200 text-black font-bold">
@@ -39,20 +36,37 @@ async function renderProducts() {
         });
     });
 }
-
 renderProducts();
+
 // cart array
 let cart = JSON.parse(localStorage.getItem("")) || [];
 updateCart();
 
 // ADD TO CART
-function addToCart(id) {
+function addToCart(id)
+ {
+  fetch('https://fakestoreapi.com/carts',{
+            method:"POST",
+            body:JSON.stringify(
+                {
+                    userId:id,
+                    date:new Date(),
+                    products:[
+                      {
+                        productId:id,
+                        quantity:1
+                      }
+                    ]
+                }
+            )
+        })
+            .then(res=>res.json())
+            .then(json=>console.log(json))
   // check if prodcut already exist in cart
   if (cart.some((item) => item.id === id)) {
     changeNumberOfUnits("", id);
   } else {
     const item = productarray && productarray?.length > 0 && productarray?.find((product) => product.id === id);
-    console.log("item" ,item);
 
     
     cart.push({
@@ -98,6 +112,9 @@ function doSomething(event) {
   event.preventDefault();
 }
 function showcart() {
+  fetch('https://fakestoreapi.com/carts')
+            .then(res=>res.json())
+            .then(json=>console.log(json))
   document.querySelector(".cart").style.display = "block";
 }
 function removecart() {
